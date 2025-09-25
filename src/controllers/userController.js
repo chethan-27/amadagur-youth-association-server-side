@@ -1,6 +1,5 @@
 const User = require("../models/user");
 
-// Create User
 exports.createUser = async (req, res) => {
     try {
         console.log("Creating user:", req);
@@ -11,7 +10,6 @@ exports.createUser = async (req, res) => {
     }
 };
 
-// Get All Users
 exports.getUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -21,7 +19,6 @@ exports.getUsers = async (req, res) => {
     }
 };
 
-//Get User by ID
 exports.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -30,7 +27,7 @@ exports.getUserById = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
-// Update User
+
 exports.updateUser = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -40,7 +37,6 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// Delete User
 exports.deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);

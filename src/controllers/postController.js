@@ -1,6 +1,5 @@
 const Post = require("../models/post");
 
-// Create Post
 exports.createPost = async (req, res) => {
     try {
         const post = await Post.create(req.body);
@@ -10,7 +9,6 @@ exports.createPost = async (req, res) => {
     }
 };
 
-// Get All Posts
 exports.getPosts = async (req, res) => {
     try {
         const posts = await Post.find().populate("author", "name email");
@@ -20,7 +18,15 @@ exports.getPosts = async (req, res) => {
     }
 };
 
-// Update Post
+exports.getPostsCount = async (req, res) => {
+    try {
+        const count = await Post.countDocuments();
+        res.json({ count });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 exports.updatePost = async (req, res) => {
     try {
         const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -30,7 +36,6 @@ exports.updatePost = async (req, res) => {
     }
 };
 
-// Delete Post
 exports.deletePost = async (req, res) => {
     try {
         await Post.findByIdAndDelete(req.params.id);
