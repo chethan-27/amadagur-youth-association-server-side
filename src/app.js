@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/auth", authRoutes);
-app.use("api/s3", S3Router);
+app.use("/api/s3", S3Router);
 app.get("/home", (req, res) => res.send("Hello Home!!"));
 
 module.exports = app;
