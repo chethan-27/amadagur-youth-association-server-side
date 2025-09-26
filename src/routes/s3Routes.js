@@ -6,6 +6,6 @@ const S3Router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 S3Router.post("/upload", upload.single("file"), filesHandlers.uploadFile);
-S3Router.delete("/delete/:key", filesHandlers.deleteFile);
+S3Router.delete("/delete", filesHandlers.deleteFile);
 
 module.exports = S3Router;

@@ -5,6 +5,7 @@ const uploadFile = async (req, res) => {
     try {
 
         let s3 = getS3Client();
+        let region = process.env.AWS_REGION;
 
         const file = req.file;
         const title = req.body.title || file.originalname;
@@ -36,11 +37,16 @@ const uploadFile = async (req, res) => {
 const deleteFile = async (req, res) => {
     try {
         let s3 = getS3Client();
+        let key = req.body.key;
+
+        if (!key) {
+            return res.status(400).json({ error: "File key is required" });
+        }
 
         await s3
             .deleteObject({
                 Bucket,
-                Key: req.params.key,
+                Key: key,
             })
             .promise();
 
